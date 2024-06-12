@@ -3,18 +3,34 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Calendar } from "lucide-react";
-import axios from "axios"; // Import axios for making HTTP requests
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/Loader";
+
+
+interface AuthorDetails {
+  fullName: string;
+  email: string;
+}
+
+interface Post {
+  title: string;
+  content: string;
+  imageUrl: string;
+  createdAt: string;
+  authorDetails: AuthorDetails;
+  author: string;
+}
+
+
 
 const DetailPage = () => {
   const router = useRouter();
   const { postId } = useParams();
 
-  const [post, setPost] = useState(null); // State to hold post data
+  const [post, setPost] = useState<Post | null>(null);
 
 
-  // Function to fetch post data by postId
   const fetchPost = async () => {
     try {
       const response = await axios.get(
@@ -26,14 +42,12 @@ const DetailPage = () => {
     }
   };
 
-  // Fetch post data on component mount
   useEffect(() => {
     if (postId) {
       fetchPost();
     }
   }, [postId]);
 
-  // If post is null or still loading, show a loading indicator
   if (!post) {
     return (
       <Loader />
@@ -95,7 +109,7 @@ const DetailPage = () => {
         </div>
       </div>
       <Button
-        onClick={() => router.back()} // Go back to the previous page
+        onClick={() => router.back()} 
         className="mt-4"
         variant={"link"}
       >

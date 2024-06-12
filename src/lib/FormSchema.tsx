@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-// Define FormSchema for general form validation
 export const FormSchema = z.object({
   fullName: z.string().min(1, { message: "Name can't be empty" }),
   email: z.string().email({
@@ -9,7 +8,6 @@ export const FormSchema = z.object({
   password: z.string().min(8, { message: "Password must be at least 8 characters long" }),
 });
 
-// Define signinSchema for sign-in form validation
 export const signinSchema = z.object({
   email: z.string().email({
     message: "Invalid email address",
@@ -17,7 +15,6 @@ export const signinSchema = z.object({
   password: z.string().min(8, { message: "Password must be at least 8 characters long" }),
 });
 
-// Define formSchema for blog post form validation
 export const formSchema = z
   .object({
     title: z.string({

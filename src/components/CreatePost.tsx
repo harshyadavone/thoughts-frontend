@@ -13,7 +13,6 @@ interface CreatePostProps {}
 
 const CreatePost: React.FC<CreatePostProps> = () => {
   const currentUser = useSelector((state : any) => state.user)
-  // console.log(currentUser.currentUser._id)
   const router = useRouter()
 
   if(!currentUser.currentUser){

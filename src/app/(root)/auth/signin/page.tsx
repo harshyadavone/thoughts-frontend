@@ -139,7 +139,7 @@ const SignInForm = () => {
             />
             <div className="flex justify-between">
               {loading ? (
-                <LoadingButton className="text-white transition-colors duration-300 w-full bg-blue-600 hover:bg-blue-700  dark:bg-blue-600 dark:hover:bg-blue-700" />
+                <LoadingButton />
               ) : (
                 <Button
                   type="submit"

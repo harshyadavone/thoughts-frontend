@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
+import TopBar from "@/components/TopBar";
+import LeftSidebar from "@/components/LeftSidebar";
+import BottomBar from "@/components/BottomBar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +18,32 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="min-h-screen flex flex-col md:flex-row">
+            <div className="hidden md:block">
+              {/* <LeftSidebar /> */}
+            </div>
+            <div className="flex-1 p-4 md:pt-0">
+              <div className="block md:hidden">
+                {/* <TopBar /> */}
+              </div>
+   
+              {children}
+          
+              <div className="block md:hidden">
+                {/* <BottomBar /> */}
+              </div>
+            </div>
+          </div>
+          <Toaster />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

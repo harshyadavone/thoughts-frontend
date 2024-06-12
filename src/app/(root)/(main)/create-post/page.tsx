@@ -1,9 +1,9 @@
-import LoadingButton from '@/components/LoadingButton'
+import CreatePost from '@/components/CreatePost'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>main page</div>
+    <div><CreatePost  /></div>
   )
 }
 

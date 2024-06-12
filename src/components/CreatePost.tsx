@@ -68,7 +68,7 @@ const CreatePost: React.FC<CreatePostProps> = () => {
   
 
   return (
-    <div className="p-3 max-w-3xl mx-auto mt-10 mb-10 min-h-screen">
+    <div className="p-3 max-w-3xl mx-auto my-10 min-h-screen">
       <h1 className="text-center text-3xl my-7 font-semibold">Create a post</h1>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
@@ -110,7 +110,7 @@ const CreatePost: React.FC<CreatePostProps> = () => {
             setFormData({ ...formData, content });
           }}
         />
-        <div className="flex justify-between">
+        <div className="flex justify-between pt-4 mb-4">
           {loading ? (
             <Button disabled className="text-white bg-gray-400 w-full cursor-not-allowed">
               <Loader2 className="mr-2 h-6 w-6 animate-spin" />

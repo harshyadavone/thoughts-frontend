@@ -7,7 +7,6 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/Loader";
 
-
 interface AuthorDetails {
   fullName: string;
   email: string;
@@ -22,14 +21,11 @@ interface Post {
   author: string;
 }
 
-
-
 const DetailPage = () => {
   const router = useRouter();
   const { postId } = useParams();
 
   const [post, setPost] = useState<Post | null>(null);
-
 
   const fetchPost = async () => {
     try {
@@ -49,34 +45,33 @@ const DetailPage = () => {
   }, [postId]);
 
   if (!post) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
 
   const { title, content, imageUrl, createdAt, authorDetails, author } = post;
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <img src={imageUrl} alt={title} className="rounded-md w-full mb-4" />
-      <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">
+    <div className="max-w-3xl mx-auto p-2 md:p-4">
+      <img src={imageUrl} alt={title} className="rounded-md w-full mt-8 mb-8 md:mt-6 md:mb-6" />
+
+      <h1 className="text-2xl md:text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">
         {title}
       </h1>
-      <p className="text-gray-700 dark:text-gray-300 mb-4">
+      <p className="text-gray-700 dark:text-gray-300 mb-2 md:mb-4">
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </p>
-      <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+      <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
         <div className="flex items-center gap-1">
           <Calendar
             className="text-gray-500 dark:text-gray-400"
             height={15}
             width={15}
           />
-          <span className="text-sm">
+          <span className="text-xs md:text-sm">
             {new Date(createdAt).toLocaleDateString()}
           </span>
         </div>
-        <div className="flex items-center pl-3">
+        <div className="flex items-center pl-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -101,16 +96,15 @@ const DetailPage = () => {
           <Button
             variant={"link"}
             onClick={() => router.push(`/dashboard/${author}`)}
-            className="text-sm -ml-3"
+            className="text-xs md:text-sm -ml-3"
           >
-            
             {authorDetails?.fullName || "Anonymous"}
           </Button>
         </div>
       </div>
       <Button
-        onClick={() => router.back()} 
-        className="mt-4"
+        onClick={() => router.back()}
+        className="mt-2 md:mt-4"
         variant={"link"}
       >
         Back to Posts

@@ -24,14 +24,14 @@ type PostListProps = {
 
 const PostList = ({ posts }: PostListProps) => {
   return (
-    <div className="grid md:grid-cols-2 gap-4">
+    <div className="grid md:grid-cols-2 gap-2">
       {posts.map((post) => (
         <Link
           key={post._id}
           href={`/detail/${post._id}`}
-          className="group mb-2 transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-900 p-4 rounded-lg shadow-md"
+          className="group mb-2 transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-900 p-2 md:p-2 rounded-lg shadow-md"
         >
-          <div className="grid lg:grid-cols-[2fr_3fr] gap-5">
+          <div className="grid lg:grid-cols-[2fr_3fr] gap-2">
             <AspectRatio ratio={16 / 6}>
               <img
                 src={post.imageUrl}
@@ -40,22 +40,22 @@ const PostList = ({ posts }: PostListProps) => {
               />
             </AspectRatio>
             <div>
-              <h3 className="text-2xl font-bold tracking-tight mb-2 group-hover:underline">
+              <h3 className="text-lg md:text-xl font-bold tracking-tight mb-1 group-hover:underline">
                 <TruncatedText text={post.title} maxLength={15} />
               </h3>
-              <p className="mb-4 text-gray-600">
+              <p className="mb-2 text-gray-600">
                 <TruncatedText text={post.content} maxLength={25} dangerous />
               </p>
-              <div className="flex items-center gap-4 text-gray-500">
-                <div className="flex  items-center gap-1">
+              <div className="flex items-center gap-2 text-gray-500">
+                <div className="flex items-center gap-1">
                   <Calendar className="text-gray-500" height={15} width={15} />
-                  <span className="text-sm text-center">
+                  <span className="text-xs md:text-sm text-center">
                     {new Date(post.createdAt).toLocaleDateString()}
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <UserIcon />
-                  <span className="text-sm text-center">
+                  <span className="text-xs md:text-sm text-center">
                     {post?.authorDetails?.fullName
                       ? post?.authorDetails?.fullName
                       : "Anonymous"}

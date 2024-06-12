@@ -1,5 +1,5 @@
 'use client'
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import PostList from "@/components/PostList";
 import PaginationSelector from "@/components/PaginationSelector";
@@ -66,9 +66,9 @@ const PostsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      <main className="flex-1 p-4 md:pt-0">
-        <div className="flex flex-col h-screen overflow-y-hidden md:pt-9">
-          <div className="overflow-auto h-full mt-10 md:mt-0 mb-10 md:mb-0 custom-scrollbar">
+      <main className="flex-1 p-2 md:pt-0">
+        <div className="flex flex-col h-screen overflow-y-hidden md:pt-4">
+          <div className="overflow-auto h-full mt-4 md:mt-0 mb-4 md:mb-0 custom-scrollbar">
             {/* Conditional rendering based on loading state */}
             {loading ? (
               <div className="flex items-center justify-center h-full">

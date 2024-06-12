@@ -44,12 +44,14 @@ const PostList = ({ posts }: PostListProps) => {
                 <TruncatedText text={post.title} maxLength={15} />
               </h3>
               <p className="mb-4 text-gray-600">
-                <TruncatedText text={post.content} maxLength={25} />
+                <TruncatedText text={post.content} maxLength={25} dangerous />
               </p>
               <div className="flex items-center gap-4 text-gray-500">
                 <div className="flex  items-center gap-1">
-                  <Calendar className="text-gray-500" height={15} width={15}/>
-                  <span className="text-sm text-center">{new Date(post.createdAt).toLocaleDateString()}</span>
+                  <Calendar className="text-gray-500" height={15} width={15} />
+                  <span className="text-sm text-center">
+                    {new Date(post.createdAt).toLocaleDateString()}
+                  </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <UserIcon />

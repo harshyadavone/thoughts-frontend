@@ -52,7 +52,7 @@ const DetailPage = () => {
   const { title, content, imageUrl, createdAt, authorDetails, author } = post;
 
   return (
-    <div className="max-w-3xl mx-auto p-2 md:p-4">
+    <div className="max-w-3xl mx-auto p-6 mt-4 mb-8 md:p-4">
       <img
         src={imageUrl}
         alt={title}

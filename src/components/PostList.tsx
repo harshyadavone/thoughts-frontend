@@ -24,14 +24,14 @@ type PostListProps = {
 
 const PostList = ({ posts }: PostListProps) => {
   return (
-    <div className="grid md:grid-cols-2 gap-2 md:gap-3">
+    <div className="grid md:grid-cols-2 gap-2 md:gap-3 ">
       {posts.map((post) => (
         <Link
           key={post._id}
           href={`/detail/${post._id}`}
-          className="group mb-2 transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-900 p-4 rounded-lg shadow-md"
+          className="group mb-2 transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-gray-900 p-4 rounded-md"
         >
-          <div className="grid lg:grid-cols-[2fr_3fr] gap-5">
+          <div className="grid lg:grid-cols-[2fr_3fr] gap-5 ">
             <AspectRatio ratio={16 / 6}>
               <img
                 src={post.imageUrl}

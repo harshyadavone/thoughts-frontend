@@ -35,11 +35,14 @@ interface RootState {
   user: {
     loading: boolean;
     error: string | null;
+    currentUser: any;
   };
 }
 
 const SignInForm = () => {
-  const { loading, error } = useSelector((state: RootState) => state.user);
+  const { loading, error, currentUser } = useSelector(
+    (state: RootState) => state.user
+  );
   const dispatch = useDispatch();
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
@@ -50,6 +53,10 @@ const SignInForm = () => {
       password: "",
     },
   });
+
+  if (currentUser) {
+    router.push("/posts");
+  }
 
   const onSubmit = async (data: SignInFormData) => {
     setSubmitting(true);
@@ -66,7 +73,7 @@ const SignInForm = () => {
       if (response.status === 200) {
         toast.success("User signed in successfully", { position: "top-right" });
         dispatch(signInSuccess(response.data));
-        router.push("/");
+        router.push("/posts");
       } else {
         dispatch(signInFailure(response.data));
         toast.error("Failed to Signin.", { position: "top-right" });

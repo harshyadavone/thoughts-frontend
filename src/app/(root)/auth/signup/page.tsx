@@ -19,9 +19,14 @@ import { toast } from "sonner";
 import axios from "axios";
 
 import { useRouter } from "next/navigation";
+import LoadingButton from "@/components/LoadingButton";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function SignUpForm() {
+  const { currentUser } = useSelector((state : any) => state.user);
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -32,27 +37,35 @@ export default function SignUpForm() {
     },
   });
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("onSubmit called with data:", data);
+  if(currentUser){
+    router.push("/posts")
+  }
 
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
+      setLoading(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/signup`,
         data
       );
-      if (response.data.success) {
-        toast.success("Account created successfully.", {
+
+      if (response.status === 201) {
+        toast.success("Account created successfully", {
           position: "top-right",
         });
+        setLoading(false);
         router.push("/auth/signin");
       } else {
-        toast.error("Failed to create account.", { position: "top-right" });
+        setLoading(false);
+        toast.error("Failed to Signin.", { position: "top-right" });
       }
-    } catch (error) {
-      console.error("Error during sign up:", error);
-      toast.error("An error occurred during sign up. Please try again.", {
+    } catch (error: any) {
+      setLoading(false);
+      toast.error("An error occurred during Sign Up. Please try again.", {
         position: "top-right",
       });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -135,12 +148,16 @@ export default function SignUpForm() {
               )}
             />
             <div className="flex justify-between">
-              <Button
-                type="submit"
-                className="text-white transition-colors duration-300 w-full bg-blue-600 hover:bg-blue-700  dark:bg-blue-600 dark:hover:bg-blue-700"
-              >
-                Create account
-              </Button>
+              {loading ? (
+                <LoadingButton />
+              ) : (
+                <Button
+                  type="submit"
+                  className="text-white transition-colors duration-300 w-full bg-blue-600 hover:bg-blue-700  dark:bg-blue-600 dark:hover:bg-blue-700"
+                >
+                  Sign In
+                </Button>
+              )}
             </div>
           </form>
         </Form>

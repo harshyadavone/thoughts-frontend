@@ -74,8 +74,8 @@ export const SidebarItem = ({
     <li
       className={`
         relative flex items-center py-2 px-3 my-1
-        font-medium rounded-md cursor-pointer
-        transition-colors group
+        font-sans font-normal tracking-wide rounded-md cursor-pointer
+        transition-colors group 
         ${isActive? "bg-gray-200 text-[#9013fe] dark:bg-gray-800 dark:text-[#9013fe]" : "hover:bg-gray-100 text-gray-600 dark:hover:bg-gray-900 dark:text-gray-300"}
       `}
     >
@@ -86,6 +86,7 @@ export const SidebarItem = ({
         {text}
       </span>
     </li>
+    
   );
 };
 
@@ -110,40 +111,6 @@ const UserIcon = (props: React.SVGProps<SVGSVGElement>) => (
       d="M16.5 6.5C16.5 8.98528 14.4853 11 12 11C9.51472 11 7.5 8.98528 7.5 6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5Z"
       stroke="currentColor"
       strokeWidth="1.5"
-    />
-  </svg>
-);
-
-const Menu11Icon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    width={20}
-    height={20}
-    color={"#9013fe"}
-    fill={"none"}
-    {...props}
-  >
-    <path
-      d="M20 12L10 12"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M20 5L4 5"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M20 19L4 19"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
     />
   </svg>
 );

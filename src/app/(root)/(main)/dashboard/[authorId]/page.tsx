@@ -27,7 +27,7 @@ type Pagination = {
 };
 
 const PostsPage: React.FC = () => {
-  const currentUser = useSelector((state: any) => state.user);
+  const {currentUser} = useSelector((state: any) => state.user);
 
   const { authorId } = useParams();
   const router = useRouter();
@@ -39,7 +39,7 @@ const PostsPage: React.FC = () => {
   });
   const [loading, setLoading] = useState<boolean>(false);
 
-  if (!currentUser.currentUser) {
+  if (!currentUser) {
     router.push("/auth/signin");
   }
 
@@ -80,6 +80,7 @@ const PostsPage: React.FC = () => {
       <main className="flex-1 p-4 md:pt-0">
         <div className="flex flex-col h-screen overflow-y-hidden md:pt-9">
           <div className="overflow-auto h-full mt-10 md:mt-0 mb-10 md:mb-0 custom-scrollbar">
+
             {loading && (
               <div className="flex items-center justify-center h-full">
                 <Loader />

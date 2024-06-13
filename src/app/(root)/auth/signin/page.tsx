@@ -59,9 +59,7 @@ const SignInForm = () => {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/auth/signin`,
         data,
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          withCredentials: true,
         }
       );
 

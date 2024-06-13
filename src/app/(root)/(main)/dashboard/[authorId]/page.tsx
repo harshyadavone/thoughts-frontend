@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import PostList from "@/components/PostList";
@@ -30,7 +30,7 @@ const PostsPage: React.FC = () => {
   const currentUser = useSelector((state: any) => state.user);
 
   const { authorId } = useParams();
-  const router = useRouter()
+  const router = useRouter();
   const [posts, setPosts] = useState<Post[]>([]);
   const [pagination, setPagination] = useState<Pagination>({
     total: 0,
@@ -39,8 +39,8 @@ const PostsPage: React.FC = () => {
   });
   const [loading, setLoading] = useState<boolean>(false);
 
-  if(!currentUser.currentUser){
-    router.push("/auth/signin")
+  if (!currentUser.currentUser) {
+    router.push("/auth/signin");
   }
 
   useEffect(() => {
@@ -53,7 +53,10 @@ const PostsPage: React.FC = () => {
       const response = await axios.get<{
         data: Post[];
         pagination: Pagination;
-      }>(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/post/posts/author/${authorId}?page=${page}`);
+      }>(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/post/posts/author/${authorId}?page=${page}`,
+        { withCredentials: true }
+      );
       const { data, pagination } = response.data;
       setPosts(data);
       setPagination(pagination);
@@ -68,8 +71,8 @@ const PostsPage: React.FC = () => {
     fetchPosts(page);
   };
 
-  if(loading){
-    <Loader />
+  if (loading) {
+    <Loader />;
   }
 
   return (

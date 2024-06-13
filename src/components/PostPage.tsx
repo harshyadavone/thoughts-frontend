@@ -43,7 +43,7 @@ const PostsPage: React.FC = () => {
       const response = await axios.get<{
         data: Post[];
         pagination: Pagination;
-      }>(`${process.env.NEXT_PUBLIC_API_BASE_URL as string}/api/post/get-posts?page=${page}`);
+      }>(`${process.env.NEXT_PUBLIC_API_BASE_URL as string}/api/post/get-posts?page=${page}`,  {withCredentials: true});
       const { data, pagination } = response.data;
       setPosts(data);
       setPagination(pagination);
@@ -68,7 +68,7 @@ const PostsPage: React.FC = () => {
     <div className="min-h-screen flex flex-col md:flex-row">
       <main className="flex-1 p-2 md:pt-0">
         <div className="flex flex-col h-screen overflow-y-hidden md:pt-4">
-          <div className="overflow-auto h-full mt-4 md:mt-0 mb-4 md:mb-0 custom-scrollbar">
+          <div className="overflow-auto h-full mt-10 md:mt-0 mb-10 md:mb-0 custom-scrollbar">
             {/* Conditional rendering based on loading state */}
             {loading ? (
               <div className="flex items-center justify-center h-full">

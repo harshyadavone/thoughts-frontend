@@ -22,22 +22,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="min-h-screen flex flex-col md:flex-row">
-            <div className="hidden md:block">
-              {/* <LeftSidebar /> */}
-            </div>
-            <div className="flex-1 p-4 md:pt-0">
-              <div className="block md:hidden">
-                {/* <TopBar /> */}
-              </div>
-   
-              {children}
-          
-              <div className="block md:hidden">
-                {/* <BottomBar /> */}
-              </div>
-            </div>
-          </div>
+          {children}
+
           <Toaster />
         </ThemeProvider>
       </body>

@@ -14,7 +14,7 @@ export default function Layout({
           <div className="hidden md:block">
             <LeftSidebar />
           </div>
-          <div className="flex-1 p-4 md:pt-0">
+          <div className="flex-1 md:pt-0">
             <div className="block md:hidden">
               <TopBar />
             </div>

@@ -12,18 +12,17 @@ import { Loader2 } from "lucide-react";
 interface CreatePostProps {}
 
 const CreatePost: React.FC<CreatePostProps> = () => {
-  const currentUser = useSelector((state : any) => state.user)
-  const router = useRouter()
+  const currentUser = useSelector((state: any) => state.user);
+  const router = useRouter();
 
-  if(!currentUser.currentUser){
-    router.push("/auth/signin")
+  if (!currentUser.currentUser) {
+    router.push("/auth/signin");
   }
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [formData, setFormData] = useState({
     title: "",
     content: "",
-    _id: "",
   });
   const [publishError, setPublishError] = useState<string | null>(null);
 
@@ -39,33 +38,35 @@ const CreatePost: React.FC<CreatePostProps> = () => {
     postData.append("imageFile", imageFile);
     postData.append("title", formData.title);
     postData.append("content", formData.content);
-    postData.append("author" , currentUser.currentUser._id)
 
     try {
-      setLoading(true)
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/post/`, {
-        method: "POST",
-        body: postData,
-      });
-  
+      setLoading(true);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/post/`,
+        {
+          method: "POST",
+          body: postData,
+          credentials: "include",
+        }
+      );
+
       const data = await res.json();
       if (!res.ok) {
-        setLoading(false)
+        setLoading(false);
         setPublishError(data.message);
         return;
       }
-      toast.success("Post published successfully", { position: "top-right" })
+      toast.success("Post published successfully", { position: "top-right" });
       setPublishError(null);
-      setLoading(false)
-        router.push("/posts")
+      setLoading(false);
+      router.push(`/detail/${data._id}`);
     } catch (error) {
       setPublishError("Something went wrong!");
-    } finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
-  
 
   return (
     <div className="p-3 max-w-3xl mx-auto my-10 min-h-screen">
@@ -112,7 +113,10 @@ const CreatePost: React.FC<CreatePostProps> = () => {
         />
         <div className="flex justify-between pt-4 mb-4">
           {loading ? (
-            <Button disabled className="text-white bg-gray-400 w-full cursor-not-allowed">
+            <Button
+              disabled
+              className="text-white bg-gray-400 w-full cursor-not-allowed"
+            >
               <Loader2 className="mr-2 h-6 w-6 animate-spin" />
               Publishing...
             </Button>
